@@ -1,8 +1,11 @@
 import sqlite3
 from sqlite3 import Error
 import datetime
+import os.path
 
-db_file = 'crimemap.db'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+db_file = os.path.join(BASE_DIR, "crimemap.db")
+
 
 class DBHelper:
     def get_all_inputs(self):
