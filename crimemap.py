@@ -1,5 +1,6 @@
 from dbhelper import DBHelper
 from flask import Flask
+import json
 from flask import render_template
 from flask import request
 import os
@@ -9,12 +10,9 @@ DB = DBHelper()
 
 @app.route("/")
 def home():
-    try:
-        data = DB.get_all_inputs()
-    except Exception as e:
-        print(e)
-        data = None
-    return render_template("home.html", data=data, code=os.environ.get('GOOGLE_MAPS_APY_KEY'))
+    crimes = DB.get_all_crimes()
+    crimes = json.dumps(crimes)
+    return render_template("home.html", crimes=crimes, code=os.environ.get('GOOGLE_MAPS_APY_KEY'))
 
 
 @app.route("/add", methods=["POST"])

@@ -55,14 +55,16 @@ class DBHelper:
     def get_all_crimes(self):
         try:
             conn = sqlite3.connect(db_file)
-            query = "SELECT latitude, longitude, date, category,description FROM crimes; "
-            conn.cursor().execute(query)
+            query = "SELECT latitude, longtitude, date, category,description FROM crimes; "
+            # conn.cursor().execute(query)
             named_crimes = []
-            for crime in conn.cursor():
+            a = list(conn.cursor().execute(query))
+            for crime in a:
                 named_crime = {
                     'latitude': crime[0],
                     'longitude': crime[1],
-                    'date': datetime.datetime.strftime(crime[2], '%Y-%m-%d'),
+                    # 'date': datetime.datetime.strftime(crime[2], '%Y-%m-%d'),
+                    'date': crime[2],
                     'category': crime[3],
                     'description': crime[4]
                 }
