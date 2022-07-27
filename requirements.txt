@@ -3,3 +3,5 @@ setuptools
 wheel
 ipython
 Flask
+dateparser
+gunicorn
